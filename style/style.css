@@ -8,6 +8,11 @@ header {
     display: none;
 }
 
+.percentage {
+  font-size:0.8em;
+  display: inline-block;
+}
+
 .content {
 	border-radius: .6rem;
     box-shadow: 0 1.2rem 3.6rem rgba(0,0,0,.2);
@@ -20,24 +25,18 @@ p, label, th, tr{
 }
 
 input {
-	display: inline-block;
-    height: 52px;
+	  display: inline-block;
+    height: 10%;
     width: 15%;
     margin: 0 0 15px;
     padding: 1.0625em 1em;
     color: #30373b;
-    font-family: ShopifySans, Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
     -webkit-box-shadow: 0 0 0 1px #c4cdd5;
     box-shadow: 0 0 0 1px #c4cdd5;
-    border: 0;
     border-radius: 5px;
     background-color: #ffffff;
-    -webkit-transition: all 150ms;
-    transition: all 150ms;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 
 input[type="file"] {
@@ -51,7 +50,7 @@ label, input {
 }
  
 input[type="submit"]{
-	border-color: #5c6ac4;
+	  border-color: #5c6ac4;
     border-width: 0.125em;
     display: inline-block;
     padding: 1.0625em 1.875em;
@@ -62,22 +61,13 @@ input[type="submit"]{
     line-height: 1.133;
     -webkit-font-smoothing: antialiased;
     transition: 150ms ease;
-    transition-property: background-color, border-color, box-shadow, color;
     text-align: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     cursor: pointer;
     box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
     background-color: #5c6ac4;
     color: #ffffff;
     border-width: 0.125em;
-    border-style: solid;
-    border-color: transparent;
+ 
 } 
 
 
