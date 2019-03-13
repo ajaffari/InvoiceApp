@@ -4,35 +4,27 @@ $(function(){
 //Declare totals
 
 	let $priceTotal = 0;
-	let $taxTotal = $priceTotal*0.13;
+	let $totalTax = 0;
 	let $itemTotal= 0;
-	let $finalTotal = $priceTotal + $taxTotal;
-	let $discount = 0;
+	let $finalTotal = $priceTotal + $totalTax;
+	let $discountTotal = 0;
+	let $grandTotal=0;
+	let $itemCount = 0;
+	let $id =0;
 
-//Discount Calculator 
+	//Form submit
 
+	$('form').on('submit',function(e){
 
-//Total Number of Items Calculator 
+		e.preventDefault();
 
-	function itemCount() {
-			let $itemCount = $('.item_name').length;
-			$('.total_items').html($itemCount);
-	};
+		formSubmit();
 
-
-
-//Form Submit Function
-
+	});
 
 
-	function calculate(){
-		//calculate discounted price
+	//remove item
 
-		//calculate tax for item
-		let $item = $('.item').val() || 'Item';
-		$itemTotal = $itemTotal+$item;
-		//calculate total for item
-	}
 
 	function formSubmit() {
 
@@ -47,44 +39,48 @@ $(function(){
 
 		//Calculate totals
 		$priceTotal = $price + $priceTotal;
-		$taxTotal = $hst + $taxTotal;
-		$itemTotal = $discountedPrice+$hst;
-		$grandTotal=$itemTotal + $taxTotal;
+		$totalTax = $hst + $totalTax;
+		$itemTotal = $discountedPrice + $hst;
+		$grandTotal= $itemTotal + $grandTotal;
+		$discountTotal= $discountAmount + $discountTotal;
+		$itemCount = $('.item_name').length + 1;
+		$id = $id +1;
+		
+		//remove
+		$('body').on('click', '.remove_item', function(e) {
+			e.preventDefault();
+		    $(this).closest('tr').remove();
+		    $priceTotal = $priceTotal - $(this).find('.item_price').val();
+		    console.log($(this).closest('.item_price'));
+		    $('.total_items').html($itemCount);
+		    $('.discount_total').html('$' + $discountTotal);
+		    $('.total_price').html('$' + $priceTotal);
+		    $('.total_tax').html('$' + $totalTax);
+		    $('.grand_total').html('$' + $grandTotal);
+
+		});
 
 		// Add row for item;
 		$('.invoice_row').after(
-				`<tr class="item_row">
-					 <td class="item_remove"><i class="fas fa-minus-circle"></i></td>
+				`<tr id="item ${$id}">
+					 <td> <a href="#" class="remove_item ${$id}"><i class="fas fa-minus-circle"></i></a></td>
 				     <td class="item_name" scope="col">${$item}</td>
-					 <td class="item_price" scope="col">$${$price}</td>
+					 <td class="item_price" scope="col">${$price}</td>
 					 <td class="item_discount" scope="col">$${$discountAmount} <p class='percentage'>(%${$discount*100} OFF)</p></td>
-					 <td class="item_tax" scope="col">$ ${($price*0.13)}</td>
-					 <td class="item_total" scope="col">${$discountedPrice+($price*.13)}</td></tr>	`);		
+					 <td class="item_tax" scope="col">$${$hst}</td>
+					 <td class="item_total" scope="col">$${$discountedPrice+($hst)}</td></tr>`);		
 		
 		// Update Totals row
-		$('.total_tax').html($taxTotal);
-		$('.final_total').html($grandTotal);
-		$('.total').html(`$${$grandTotal}`);
-		$('.price_total').val($priceTotal);
+		$('.total_items').html($itemCount);
+		$('.discount_total').html('$' + $discountTotal);
+		$('.total_price').html('$' + $priceTotal);
+		$('.total_tax').html('$' + $totalTax);
+		$('.grand_total').html('$' + $grandTotal);
+
+		//Reset form
 		$("input[type='text']").val("");
+
 		}	
-	
-
-//Form submit
-
-	$('form').on('submit',function(e){
-
-		e.preventDefault();
-
-		//Take form inputs
-
-		//Caculateinvoice totals for price,$hst, discount and item count
-
-		formSubmit();
-		itemCount();
-
-
-});
 
 });
 
